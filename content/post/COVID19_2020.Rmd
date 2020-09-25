@@ -11,11 +11,11 @@ knitr::opts_chunk$set(collapse = TRUE)
 #set up all the libraries
 library(opendatatoronto)
 library(tidyverse)
-library(lubridate)
 library(dplyr)
 library(plyr)
 ```
-Author: Zikun (Alex) Xu
+#Author
+Written by, Zikun (Alex) Xu
 
 
 #Abstract

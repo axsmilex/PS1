@@ -8,7 +8,8 @@ tags: ["R Markdown", "plot", "regression"]
 
 
 
-<p>Author: Zikun (Alex) Xu</p>
+<p>#Author
+Written by, Zikun (Alex) Xu</p>
 <p>#Abstract</p>
 <p>In this blog we explore the demographics, geographic, and severity data information for all confirmed and probable cases reported to Toronto Public Health department. We find the general areas where the majority of cases are reported and can imply future trends of how the virus is going to affect Toronto, Ontario. This matters as for which areas to be extra cautious whenever travelling is needed and which age-groups are at the highest risk.</p>
 <p>#Introduction
@@ -63,7 +64,7 @@ labels &lt;- c(&quot;Male&quot;, &quot;Female&quot;)
 
 #Plot the data into a pie chart
 pie(x, labels, main = &quot;Figure 1. Gender of COV-ID 19 Patients&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/Genders-1.png" width="672" /></p>
+<p><img src="/post/COVID19_2020_files/figure-html/Genders-1.png" width="672" /></p>
 </div>
 <div id="age-groups" class="section level2">
 <h2>Age Groups</h2>
@@ -84,7 +85,7 @@ x2 &lt;- c(age1,age2,age3,age4,age5,age6,age7,age8,age9)
 labels2 &lt;- c(&quot;19 and younger&quot;, &quot;20 to 29 Years&quot;, &quot;30 to 39 Years&quot;, &quot;40 to 49 Years&quot;, &quot;50 to 59 Years&quot;, &quot;60 to 69 Years&quot;, &quot;70 to 79 Years&quot;, &quot;80 to 89 Years&quot;,&quot;90 and older&quot;)
 
 pie(x2, labels2, main = &quot;Figure 2. Age groups of COV-ID 19 Patients&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/Age%20Groups-1.png" width="672" /></p>
+<p><img src="/post/COVID19_2020_files/figure-html/Age%20Groups-1.png" width="672" /></p>
 </div>
 <div id="demographics" class="section level2">
 <h2>Demographics</h2>
@@ -101,7 +102,7 @@ data %&gt;%
 
 ## Warning: Use of `data$&quot;Neighbourhood Name&quot;` is discouraged. Use `Neighbourhood
 ## Name` instead.</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/plots-1.png" width="1440" /></p>
+<p><img src="/post/COVID19_2020_files/figure-html/plots-1.png" width="1440" /></p>
 <pre class="r"><code>  
 
 
@@ -162,7 +163,7 @@ labels &lt;- c(&quot;Travel&quot;, &quot;Healthcare&quot;, &quot;Close contact&q
 
 #Plot the data into a pie chart
 pie(x, labels, main = &quot;Figure4. Sources of Infection&quot;)</code></pre>
-<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/Source%20of%20Infection-1.png" width="672" /></p>
+<p><img src="/post/COVID19_2020_files/figure-html/Source%20of%20Infection-1.png" width="672" /></p>
 <p>##Weaknesses and Next Steps</p>
 <p>The weaknesses in the data provided is that it contains general answers such as NA that could affect the trends of the data. In order to show more clarity, I omitted the answers with NA which had little significance towards the overall conclusions made.</p>
 <p>The next steps prepared is to continue monitor the number of cases as well as age groups of infected individuals; as the city shows more caution towards tackling the pandemic, the municipal implements more regulations in order to stop the spread of covid-19. As there is an upward trend towards young adults and adults, the next steps are to limit social gatherings and limit contact between individuals. This is easier than said, but as a community we must strictly follow advices given by Public Health Ontario and stop the pandemic altogether.</p>
