@@ -14,13 +14,16 @@ library(tidyverse)
 library(dplyr)
 library(plyr)
 ```
+## Author
+Zikun (Alex) Xu
 
-#Abstract
+
+## Abstract
 
 In this blog we explore the demographics, geographic, and severity data information for all confirmed and probable cases reported to Toronto Public Health department. We find the general areas where the majority of cases are reported and can imply future trends of how the virus is going to affect Toronto, Ontario. This matters as for which areas to be extra cautious whenever travelling is needed and which age-groups are at the highest risk. 
 
 
-#Introduction
+## Introduction
 Since January of 2020, data has been collected by the Toronto Public Health department and in this blog I sorted the raw data provided into various sections seeing any trends can be seen - these sections being: Gender, Age Groups, Demographics, and Source of Infection. Of all 17,873 observations within the data, filtering them into various categories such as different age groups can show a trend such as younger people are at much higher risk recently compared to the start of the pandemic. Many factors can contribute to this trend such as social gatherings, close proximity to infected individuals, or being with enclosed environments. Variables such as gender or race is concluded as less significant compared to other factors such as demographics and place of infections. 
 
 
