@@ -1,7 +1,7 @@
 ---
 title: "Summary of COV-ID 19 cases in Toronto"
 author: "Zikun (Alex) Xu"
-date: 2015-07-23T21:13:14-05:00
+date: 2020-09-27T21:13:14-05:00
 categories: ["R"]
 tags: ["R Markdown", "plot", "regression"]
 ---
@@ -92,7 +92,7 @@ pie(x2, labels2, main = "Figure 2. Age groups of COV-ID 19 Patients")
 
 In this topic, the various areas throughout Toronto shows the number of infected patients throughout their corresponding neighbourhoods. Through the histogram in Figure 3, it listed all the neighbourhoods within Toronto that had covid-19 patients and displayed a count for each area. Since the histogram was too crowded for any analysis to take place, the first table contains the data of the distinct areas and the counts to show the number of patients within each neighbourhood. The second table was filtered to only contain areas with more than 300 cases of covid-19. Given that all of these areas listed in the second table show significant amount of cases compared to 128 areas, it is safe to say that the top 5 most affected areas are: Kingsview Village-The Westway (565 cases), Mount Olive-Silverstone-Jamestown (564 cases), West Humber-Clairville (558 cases), Glenfield-Jane Heights (555 cases), and Downsview-Roding-CFB (522 cases). As of Demographically speaking, these five neighbourhoods are all West of North York and North of Etobicoke and relatively close to Toronto Pearson Airport. There is a high probability that many of the cases were related to traveling and spread within those communities. This hypothesis will be verified in the next section where we look into the sources of infections. From an article by CP24 posted on September 24th, 2020, as the "second wave" just commenced and cases have increased significantly over the past month, as of the 24th there were over 400 cases reported in Ontario and majority of 151 new cases were reported in Toronto and 46 new cases in the Peel region (Wilson, C). Further showing that an uptrend in cases in specifically in Toronto and Peel. 
 
-```{r plots, tidy=FALSE}
+```{r plots, tidy=FALSE, fig.width = 15, fig.height = 8}
 
 data %>%
   ggplot(aes(x=data$'Neighbourhood Name'))+
@@ -100,6 +100,7 @@ data %>%
   stat_count(width = 0.1)+
   theme(text=element_text(size=5),axis.text.x = element_text(angle = 90, vjust = 0, hjust=1))+
   labs(title="Figure 3. Histogram of various neighborhoods that had cov-id 19 patients", x = "Neighbourhood Names")
+  
 
 
 table_count <- data %>%
@@ -138,7 +139,7 @@ pie(x, labels, main = "Figure4. Sources of Infection")
 ```
 ##Weaknesses and Next Steps
 
-The weaknesses in the data provided is that
+The weaknesses in the data provided is that 
 
 
 ##References
