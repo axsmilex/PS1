@@ -22,7 +22,7 @@ In this blog we explore the demographics, geographic, and severity data informat
 #Introduction
 
 
-```{r Extract data}
+```{r Extract data, include=FALSE}
 # get package
 package <- show_package("64b54586-6180-4485-83eb-81e8fae3b8fe")
 package
@@ -41,7 +41,7 @@ data
 #Genders
 
 
-```{r Genders}
+```{r Genders, include=FALSE}
 num_of_males <- length(which(data$`Client Gender`== "MALE"))
 num_of_females <- length(which(data$`Client Gender`== "FEMALE"))
 x <- c(num_of_males, num_of_females)
@@ -56,7 +56,7 @@ pie(x, labels, main = "Figure 1. Gender of COV-ID 19 Patients")
 
 As we can see from the pie-chart of all the age-groups generated in Figure 2, more than a quarter of COV-ID 19 cases reported in Toronto are between the ages 20 and 39, this means that elders with relatively weaker immune systems are not the only age groups that are at high risk with COV-ID 19. Adults and young adults also have high chances of catching the virus this can be due a variety of factors such as work, travel, and social gatherings. Although we cannot directly pin-point the reasons for the trend of more young adults having increase risk of catching the virus, but data shows that there appears to be an upward trend towards younger individuals. 
 
-```{r Age Groups}
+```{r Age Groups , include=FALSE, echo=FALSE}
 age1 <- length(which(data$`Age Group`== "19 and younger"))
 age2 <- length(which(data$`Age Group`== "20 to 29 Years"))
 age3 <- length(which(data$`Age Group`== "30 to 39 Years"))
@@ -77,7 +77,7 @@ pie(x2, labels2, main = "Figure 2. Age groups of COV-ID 19 Patients")
 
 
 
-```{r plots, tidy=FALSE}
+```{r plots, tidy=FALSE , include=FALSE}
 
 data %>%
   ggplot(aes(x=data$'Neighbourhood Name'))+
