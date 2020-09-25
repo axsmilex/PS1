@@ -88,7 +88,7 @@ pie(x2, labels2, main = "Figure 2. Age groups of COV-ID 19 Patients")
 ```
 
 
-#Demographics
+##Demographics
 
 In this topic, the various areas throughout Toronto shows the number of infected patients throughout their corresponding neighbourhoods. Through the histogram in Figure 3, it listed all the neighbourhoods within Toronto that had covid-19 patients and displayed a count for each area. Since the histogram was too crowded for any analysis to take place, the first table contains the data of the distinct areas and the counts to show the number of patients within each neighbourhood. The second table was filtered to only contain areas with more than 300 cases of covid-19. Given that all of these areas listed in the second table show significant amount of cases compared to 128 areas, it is safe to say that the top 5 most affected areas are: Kingsview Village-The Westway (565 cases), Mount Olive-Silverstone-Jamestown (564 cases), West Humber-Clairville (558 cases), Glenfield-Jane Heights (555 cases), and Downsview-Roding-CFB (522 cases). As of Demographically speaking, these five neighbourhoods are all West of North York and North of Etobicoke and relatively close to Toronto Pearson Airport. There is a high probability that many of the cases were related to traveling and spread within those communities. This hypothesis will be verified in the next section where we look into the sources of infections. From an article by CP24 posted on September 24th, 2020, as the "second wave" just commenced and cases have increased significantly over the past month, as of the 24th there were over 400 cases reported in Ontario and majority of 151 new cases were reported in Toronto and 46 new cases in the Peel region (Wilson, C). Further showing that an uptrend in cases in specifically in Toronto and Peel. 
 
@@ -116,7 +116,7 @@ highest_cases_areas
 ```
 
 
-#Source of Infection
+##Source of Infection
 
 This section talks about generally where patients were infected. Covid-19 can be transmitted through various forms such as through being close contact with an infected individuals, touching objects that infected people have touched, or through the air in a closed environment (BCDC). In Figure 4 we see the survey answers of where individuals report where they came in contact with the virus. As we can see from the pie chart below, over half of the cases came from close contact or from within a community, while travel fits only a relatively small percentage. This contradicts the hypothesis given above that travel is one of the biggest sources of infection, especially international travel. Although travel is a major source of how the virus enters the country but how the virus is spread especially within communities and having close contact with individuals that are infected plays a bigger role in the increase in cases. 
 
@@ -136,11 +136,12 @@ labels <- c("Travel", "Healthcare", "Close contact", "Community", "Outbreak asso
 pie(x, labels, main = "Figure4. Sources of Infection")
 
 ```
-#Weaknesses and Next Steps
+##Weaknesses and Next Steps
+
 The weaknesses in the data provided is that
 
 
-#References
+##References
 
 Citations: 
 BCDC. How it Spreads. Retrieved September 25, 2020, from http://www.bccdc.ca/health-info/diseases-conditions/covid-19/about-covid-19/how-it-spreads
