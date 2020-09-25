@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<title>Summary of COV-ID 19 cases in Toronto - Covid-19 Cases in Toronto</title>
+<meta property="og:title" content="Summary of COV-ID 19 cases in Toronto - Covid-19 Cases in Toronto">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">5 min read</span>
+    
+
+    <h1 class="article-title">Summary of COV-ID 19 cases in Toronto</h1>
+
+    
+    <span class="article-date">2015-07-23</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>#Abstract</p>
+<p>In this blog we explore the demographics, geographic, and severity data information for all confirmed and probable cases reported to Toronto Public Health department. We find the general areas where the majority of cases are reported and can imply future trends of how the virus is going to affect Toronto, Ontario. This matters as for which areas to be extra cautious whenever travelling is needed and which age-groups are at the highest risk.</p>
+<p>#Introduction</p>
+<pre class="r"><code># get package
+package &lt;- show_package(&quot;64b54586-6180-4485-83eb-81e8fae3b8fe&quot;)
+package
+## # A tibble: 1 x 11
+##   title id    topics civic_issues publisher excerpt dataset_category
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;        &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;           
+## 1 COVI… 64b5… &lt;NA&gt;   &lt;NA&gt;         &lt;NA&gt;      &lt;NA&gt;    &lt;NA&gt;            
+## # … with 4 more variables: num_resources &lt;int&gt;, formats &lt;chr&gt;,
+## #   refresh_rate &lt;chr&gt;, last_refreshed &lt;date&gt;
+ 
+# get all resources for this package
+resources &lt;- list_package_resources(&quot;64b54586-6180-4485-83eb-81e8fae3b8fe&quot;)
+ 
+# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
+datastore_resources &lt;- filter(resources, tolower(format) %in% c(&#39;csv&#39;, &#39;geojson&#39;))
+ 
+# load the first datastore resource as a sample
+data &lt;- filter(datastore_resources, row_number()==1) %&gt;% get_resource()
+data
+## # A tibble: 17,872 x 18
+##     `_id` Assigned_ID `Outbreak Assoc… `Age Group` `Neighbourhood … FSA  
+##     &lt;int&gt;       &lt;int&gt; &lt;chr&gt;            &lt;chr&gt;       &lt;chr&gt;            &lt;chr&gt;
+##  1 143647           1 Sporadic         50 to 59 Y… Willowdale East  M2N  
+##  2 143648           2 Sporadic         50 to 59 Y… Willowdale East  M2N  
+##  3 143649           3 Sporadic         20 to 29 Y… Parkwoods-Donal… M3A  
+##  4 143650           4 Sporadic         60 to 69 Y… Church-Yonge Co… M4W  
+##  5 143651           5 Sporadic         60 to 69 Y… Church-Yonge Co… M4W  
+##  6 143652           6 Sporadic         50 to 59 Y… Newtonbrook West M2R  
+##  7 143653           7 Sporadic         80 to 89 Y… Milliken         M1V  
+##  8 143654           8 Sporadic         60 to 69 Y… Willowdale West  M2N  
+##  9 143655           9 Sporadic         50 to 59 Y… Willowdale East  M2N  
+## 10 143656          10 Sporadic         60 to 69 Y… Henry Farm       M2J  
+## # … with 17,862 more rows, and 12 more variables: `Source of Infection` &lt;chr&gt;,
+## #   Classification &lt;chr&gt;, `Episode Date` &lt;chr&gt;, `Reported Date` &lt;chr&gt;, `Client
+## #   Gender` &lt;chr&gt;, Outcome &lt;chr&gt;, `Currently Hospitalized` &lt;chr&gt;, `Currently in
+## #   ICU` &lt;chr&gt;, `Currently Intubated` &lt;chr&gt;, `Ever Hospitalized` &lt;chr&gt;, `Ever
+## #   in ICU` &lt;chr&gt;, `Ever Intubated` &lt;chr&gt;</code></pre>
+<p>#Genders</p>
+<pre class="r"><code>num_of_males &lt;- length(which(data$`Client Gender`== &quot;MALE&quot;))
+num_of_females &lt;- length(which(data$`Client Gender`== &quot;FEMALE&quot;))
+x &lt;- c(num_of_males, num_of_females)
+labels &lt;- c(&quot;Male&quot;, &quot;Female&quot;)
+pie(x, labels, main = &quot;Figure 1. Gender of COV-ID 19 Patients&quot;)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/Genders-1.png" width="672" /></p>
+<p>#Age Groups</p>
+<p>As we can see from the pie-chart of all the age-groups generated in Figure 2, more than a quarter of COV-ID 19 cases reported in Toronto are between the ages 20 and 39, this means that elders with relatively weaker immune systems are not the only age groups that are at high risk with COV-ID 19. Adults and young adults also have high chances of catching the virus this can be due a variety of factors such as work, travel, and social gatherings. Although we cannot directly pin-point the reasons for the trend of more young adults having increase risk of catching the virus, but data shows that there appears to be an upward trend towards younger individuals.</p>
+<pre class="r"><code>age1 &lt;- length(which(data$`Age Group`== &quot;19 and younger&quot;))
+age2 &lt;- length(which(data$`Age Group`== &quot;20 to 29 Years&quot;))
+age3 &lt;- length(which(data$`Age Group`== &quot;30 to 39 Years&quot;))
+age4 &lt;- length(which(data$`Age Group`== &quot;40 to 49 Years&quot;))
+age5 &lt;- length(which(data$`Age Group`== &quot;50 to 59 Years&quot;))
+age6 &lt;- length(which(data$`Age Group`== &quot;60 to 69 Years&quot;))
+age7 &lt;- length(which(data$`Age Group`== &quot;70 to 79 Years&quot;))
+age8 &lt;- length(which(data$`Age Group`== &quot;80 to 89 Years&quot;)) 
+age9 &lt;- length(which(data$`Age Group`== &quot;90 and older&quot;))
+
+x2 &lt;- c(age1,age2,age3,age4,age5,age6,age7,age8,age9)
+labels2 &lt;- c(&quot;19 and younger&quot;, &quot;20 to 29 Years&quot;, &quot;30 to 39 Years&quot;, &quot;40 to 49 Years&quot;, &quot;50 to 59 Years&quot;, &quot;60 to 69 Years&quot;, &quot;70 to 79 Years&quot;, &quot;80 to 89 Years&quot;,&quot;90 and older&quot;)
+
+pie(x2, labels2, main = &quot;Figure 2. Age groups of COV-ID 19 Patients&quot;)</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/Age%20Groups-1.png" width="672" /></p>
+<pre class="r"><code>
+data %&gt;%
+  ggplot(aes(x=data$&#39;Neighbourhood Name&#39;))+
+  geom_bar()+
+  stat_count(width = 0.1)+
+  theme(text=element_text(size=5),axis.text.x = element_text(angle = 90, vjust = 0, hjust=1))+
+  labs(title=&quot;Histogram of various neighborhoods that had cov-id 19 patients&quot;, x = &quot;Neighbourhood Names&quot;)
+## Warning: Use of `data$&quot;Neighbourhood Name&quot;` is discouraged. Use `Neighbourhood
+## Name` instead.
+
+## Warning: Use of `data$&quot;Neighbourhood Name&quot;` is discouraged. Use `Neighbourhood
+## Name` instead.</code></pre>
+<p><img src="/post/2015-07-23-r-rmarkdown_files/figure-html/plots-1.png" width="672" /></p>
+<pre class="r"><code>
+
+table_count &lt;- data %&gt;%
+  group_by(data$`Neighbourhood Name`) %&gt;%
+  tally() 
+table_count
+## # A tibble: 141 x 2
+##    `data$\`Neighbourhood Name\``     n
+##    &lt;chr&gt;                         &lt;int&gt;
+##  1 Agincourt North                 103
+##  2 Agincourt South-Malvern West     68
+##  3 Alderwood                        55
+##  4 Annex                           107
+##  5 Banbury-Don Mills                49
+##  6 Bathurst Manor                  140
+##  7 Bay Street Corridor              77
+##  8 Bayview Village                  44
+##  9 Bayview Woods-Steeles           121
+## 10 Bedford Park-Nortown            102
+## # … with 131 more rows
+
+
+highest_cases_areas &lt;-
+  table_count%&gt;%
+  filter(n&gt;300)
+highest_cases_areas
+## # A tibble: 13 x 2
+##    `data$\`Neighbourhood Name\``         n
+##    &lt;chr&gt;                             &lt;int&gt;
+##  1 Black Creek                         347
+##  2 Downsview-Roding-CFB                522
+##  3 Glenfield-Jane Heights              555
+##  4 Islington-City Centre West          415
+##  5 Kingsview Village-The Westway       365
+##  6 Mount Olive-Silverstone-Jamestown   564
+##  7 NaN                                 678
+##  8 Rouge                               341
+##  9 Waterfront Communities-The Island   320
+## 10 West Humber-Clairville              558
+## 11 Weston                              368
+## 12 Woburn                              345
+## 13 York University Heights             488</code></pre>
+<p>#References</p>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,107 @@
+---
+title: "Summary of COV-ID 19 cases in Toronto"
+author: "Zikun (Alex) Xu"
+date: 2015-07-23T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+library(opendatatoronto)
+library(tidyverse)
+library(dplyr)
+library(plyr)
+```
+
+
+#Abstract
+
+In this blog we explore the demographics, geographic, and severity data information for all confirmed and probable cases reported to Toronto Public Health department. We find the general areas where the majority of cases are reported and can imply future trends of how the virus is going to affect Toronto, Ontario. This matters as for which areas to be extra cautious whenever travelling is needed and which age-groups are at the highest risk. 
+
+#Introduction
+
+
+```{r Extract data}
+# get package
+package <- show_package("64b54586-6180-4485-83eb-81e8fae3b8fe")
+package
+ 
+# get all resources for this package
+resources <- list_package_resources("64b54586-6180-4485-83eb-81e8fae3b8fe")
+ 
+# identify datastore resources; by default, Toronto Open Data sets datastore resource format to CSV for non-geospatial and GeoJSON for geospatial resources
+datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'))
+ 
+# load the first datastore resource as a sample
+data <- filter(datastore_resources, row_number()==1) %>% get_resource()
+data
+
+```
+#Genders
+
+
+```{r Genders}
+num_of_males <- length(which(data$`Client Gender`== "MALE"))
+num_of_females <- length(which(data$`Client Gender`== "FEMALE"))
+x <- c(num_of_males, num_of_females)
+labels <- c("Male", "Female")
+pie(x, labels, main = "Figure 1. Gender of COV-ID 19 Patients")
+
+```
+
+
+
+#Age Groups
+
+As we can see from the pie-chart of all the age-groups generated in Figure 2, more than a quarter of COV-ID 19 cases reported in Toronto are between the ages 20 and 39, this means that elders with relatively weaker immune systems are not the only age groups that are at high risk with COV-ID 19. Adults and young adults also have high chances of catching the virus this can be due a variety of factors such as work, travel, and social gatherings. Although we cannot directly pin-point the reasons for the trend of more young adults having increase risk of catching the virus, but data shows that there appears to be an upward trend towards younger individuals. 
+
+```{r Age Groups}
+age1 <- length(which(data$`Age Group`== "19 and younger"))
+age2 <- length(which(data$`Age Group`== "20 to 29 Years"))
+age3 <- length(which(data$`Age Group`== "30 to 39 Years"))
+age4 <- length(which(data$`Age Group`== "40 to 49 Years"))
+age5 <- length(which(data$`Age Group`== "50 to 59 Years"))
+age6 <- length(which(data$`Age Group`== "60 to 69 Years"))
+age7 <- length(which(data$`Age Group`== "70 to 79 Years"))
+age8 <- length(which(data$`Age Group`== "80 to 89 Years")) 
+age9 <- length(which(data$`Age Group`== "90 and older"))
+
+x2 <- c(age1,age2,age3,age4,age5,age6,age7,age8,age9)
+labels2 <- c("19 and younger", "20 to 29 Years", "30 to 39 Years", "40 to 49 Years", "50 to 59 Years", "60 to 69 Years", "70 to 79 Years", "80 to 89 Years","90 and older")
+
+pie(x2, labels2, main = "Figure 2. Age groups of COV-ID 19 Patients")
+
+```
+
+
+
+
+```{r plots, tidy=FALSE}
+
+data %>%
+  ggplot(aes(x=data$'Neighbourhood Name'))+
+  geom_bar()+
+  stat_count(width = 0.1)+
+  theme(text=element_text(size=5),axis.text.x = element_text(angle = 90, vjust = 0, hjust=1))+
+  labs(title="Histogram of various neighborhoods that had cov-id 19 patients", x = "Neighbourhood Names")
+
+
+table_count <- data %>%
+  group_by(data$`Neighbourhood Name`) %>%
+  tally() 
+table_count
+
+
+highest_cases_areas <-
+  table_count%>%
+  filter(n>300)
+highest_cases_areas
+
+```
+
+
+#References
+
+
+
