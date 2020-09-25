@@ -8,6 +8,7 @@ tags: ["R Markdown", "plot", "regression"]
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
+#set up all the libraries
 library(opendatatoronto)
 library(tidyverse)
 library(dplyr)
@@ -22,7 +23,7 @@ In this blog we explore the demographics, geographic, and severity data informat
 #Introduction
 
 
-```{r Extract data, include=FALSE}
+```{r Extract data}
 # get package
 package <- show_package("64b54586-6180-4485-83eb-81e8fae3b8fe")
 package
@@ -43,11 +44,16 @@ data
 #Genders
 Moving on to the first topic, we take a look at the genders of covid-19 patients and from the pie chart - Figure 1 - we see that although there is slightly more females that are affected by the virus we cannot conclude that the gender variable plays a significant role how the virus is spread. Out of the 17,873 observations recorded in the data file, the gender split between infected patients seem to be fairly balanced and we cannot conclude a trend or remark that females are more at risk than males.
 
-```{r Genders, include=FALSE, echo=FALSE}
+```{r Genders}
+#Count the number of males and females within the data
 num_of_males <- length(which(data$`Client Gender`== "MALE"))
 num_of_females <- length(which(data$`Client Gender`== "FEMALE"))
+
+#Create vectors to plot into pie chart
 x <- c(num_of_males, num_of_females)
 labels <- c("Male", "Female")
+
+#Plot the data into a pie chart
 pie(x, labels, main = "Figure 1. Gender of COV-ID 19 Patients")
 
 ```
@@ -59,7 +65,8 @@ pie(x, labels, main = "Figure 1. Gender of COV-ID 19 Patients")
 As we can see from the pie-chart of all the age-groups generated in Figure 2, more than a quarter of COV-ID 19 cases reported in Toronto are between the ages 20 and 39, this means that elders with relatively weaker immune systems are not the only age groups that are at high risk with COV-ID 19. Adults and young adults also have high chances of catching the virus this can be due a variety of factors such as work, travel, and social gatherings. Although we cannot directly pin-point the reasons for the trend of more young adults having increase risk of catching the virus, but data shows that there appears to be an upward trend towards younger individuals. Stating from an article posted by CBC news "Proportion of cases among those under 19 and those 20 to 29 has increased significantly" (Brown, D.). From Figure 2, we can see an uptrend towards young adults specifically ages between 20 to 29 having an increase in risk of catching covid-19. 
 
 
-```{r Age Groups , include=FALSE, echo=FALSE}
+```{r Age Groups}
+#Filter data into different age groups counting how many answers for each age group were collected. 
 age1 <- length(which(data$`Age Group`== "19 and younger"))
 age2 <- length(which(data$`Age Group`== "20 to 29 Years"))
 age3 <- length(which(data$`Age Group`== "30 to 39 Years"))
@@ -70,6 +77,7 @@ age7 <- length(which(data$`Age Group`== "70 to 79 Years"))
 age8 <- length(which(data$`Age Group`== "80 to 89 Years")) 
 age9 <- length(which(data$`Age Group`== "90 and older"))
 
+#Create vectors for each variable - 
 x2 <- c(age1,age2,age3,age4,age5,age6,age7,age8,age9)
 labels2 <- c("19 and younger", "20 to 29 Years", "30 to 39 Years", "40 to 49 Years", "50 to 59 Years", "60 to 69 Years", "70 to 79 Years", "80 to 89 Years","90 and older")
 
@@ -80,16 +88,16 @@ pie(x2, labels2, main = "Figure 2. Age groups of COV-ID 19 Patients")
 
 #Demographics
 
-In this topic, the various areas throughout Toronto shows the number of infected patients throughout their corresponding neighbourhoods. 
+In this topic, the various areas throughout Toronto shows the number of infected patients throughout their corresponding neighbourhoods.
 
-```{r plots, tidy=FALSE , include=FALSE}
+```{r plots, tidy=FALSE}
 
 data %>%
   ggplot(aes(x=data$'Neighbourhood Name'))+
   geom_bar()+
   stat_count(width = 0.1)+
   theme(text=element_text(size=5),axis.text.x = element_text(angle = 90, vjust = 0, hjust=1))+
-  labs(title="Histogram of various neighborhoods that had cov-id 19 patients", x = "Neighbourhood Names")
+  labs(title="Figure 3. Histogram of various neighborhoods that had cov-id 19 patients", x = "Neighbourhood Names")
 
 
 table_count <- data %>%
