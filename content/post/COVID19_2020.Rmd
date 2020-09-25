@@ -14,9 +14,6 @@ library(tidyverse)
 library(dplyr)
 library(plyr)
 ```
-#Author
-Written by, Zikun (Alex) Xu
-
 
 #Abstract
 
